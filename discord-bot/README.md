@@ -12,11 +12,12 @@ Currently, it supports the following features:
 
 From any channel in your Discord server, you can use the following commands:
 - `@Steve's Butler status`: Check the status of your Minecraft server.
-    ![Status command example](/docs/assets/status.png)
+    ![Status command example](./docs/assets/status.png)
 - `@Steve's Butler start`: Start your Minecraft server.
-    ![Start command example](/docs/assets/start.png)
+    ![Start command example](./docs/assets/start.png)
 - `@Steve's Butler stop`: Stop your Minecraft server.
-    ![Stop command example](/docs/assets/stop.png)
+
+    ![Stop command example](./docs/assets/stop.png)
 
 ## Setup
 
@@ -26,8 +27,8 @@ From any channel in your Discord server, you can use the following commands:
    ```bash
    go build -o discordbot
    ```
-2. Create a config file named `config.json` in the same directory as the binary based on the provided [config.example.json](/config.example.json) template.
-3. Create a Systemd service file `/etc/systemd/system/discordbot.service` for the bot based on the provided [discordbot.example.service](/discordbot.example.service) template.
+2. Create a config file named `config.json` in the same directory as the binary based on the provided [config.example.json](./config.example.json) template.
+3. Create a Systemd service file `/etc/systemd/system/discordbot.service` for the bot based on the provided [discordbot.example.service](./discordbot.example.service) template.
 4. Run the bot using Systemd:
    ```
    sudo systemctl enable discordbot
