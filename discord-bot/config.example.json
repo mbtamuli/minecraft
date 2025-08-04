@@ -1,0 +1,5 @@
+{
+  "DISCORD_TOKEN": "YOUR_BOT_TOKEN_HERE",
+  "ALLOWED_ROLE_ID": "YOUR_ALLOWED_ROLE_ID_HERE",
+  "COMPOSE_FILE_PATH": "/path/to/your/docker-compose.yml"
+}
