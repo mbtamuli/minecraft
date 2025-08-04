@@ -1,0 +1,10 @@
+[Unit]
+Description=Steve Butler Discord Bot
+After=network.target
+
+[Service]
+ExecStart=/path/to/discord-bot-binary
+WorkingDirectory=/path/to/directory-containing-discord-bot-and-config.json
+
+[Install]
+WantedBy=multi-user.target
