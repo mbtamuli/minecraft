@@ -1,40 +1,50 @@
 services:
+  # Main Minecraft Server
   mc:
-    image: itzg/minecraft-server
+    image: itzg/minecraft-server:latest
     tty: true
     stdin_open: true
     ports:
       - "25565:25565"
     environment:
-      DIFFICULTY: "normal"
       ENABLE_ROLLING_LOGS: "TRUE"
       EULA: "TRUE"
-      MEMORY: "15G"
-      ONLINE_MODE: "TRUE"
-      SEED: "7515057474427670726"
+      MEMORY: "12G"
+      ONLINE_MODE: "FALSE"  # Allows cracked clients
       SNOOPER_ENABLED: "FALSE"
-      TYPE: FABRIC
       TZ: "Asia/Kolkata"
-      USE_AIKAR_FLAGS: "TRUE"
-      VERSION: "1.21.5"
-#https://github.com/LuckPerms/LuckPerms/issues/4083#issuecomment-2885020158
+      VERSION: 1.21.8
+      DIFFICULTY: "normal"
+      #TYPE: PAPER
+      TYPE: FABRIC
+      #WORLD: "/worlds/world-20250801-204711.tgz"
+      UID: 1001
+      GID: 1001
+      MODRINTH_ALLOWED_VERSION_TYPE: "beta"
+      MODRINTH_DOWNLOAD_DEPENDENCIES: "required"
       MODRINTH_PROJECTS: |
-        fabric-api
-        tabtps
+        visible-traders
+        trade-cycling
         lithium
         ferrite-core
-        krypton
-        visible-traders
-        luckperms:v5.4.158-fabric
+        c2me-fabric
+        tabtps
+        luckperms
+        discord-mc-chat
     volumes:
       - ./data:/data
+
+  # MC Backup Service: Automated world backup every 2 hours
   backups:
     image: itzg/mc-backup
+    restart: unless-stopped
     environment:
-      BACKUP_INTERVAL: "2h"
-      PRUNE_BACKUPS_DAYS: 2
-      RCON_HOST: mc
+      BACKUP_INTERVAL: "2h"  # Backup every 2 hours
       TZ: "Asia/Kolkata"
+      PRUNE_BACKUPS_DAYS: 1
+      RCON_HOST: mc
+      PRE_BACKUP_SCRIPT: |
+        echo "Running backup from $$RCON_HOST to $$DEST_DIR"
     volumes:
-      - ./data:/data:ro
+      - ./data:/data:ro       # Only backup the 'mc' server (read-only)
       - ./mc-backups:/backups
